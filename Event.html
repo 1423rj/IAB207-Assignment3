@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./styles/styles.css">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+
+    <!-- Scripts for automatic carousels. The example one didnt work for some reason, so its from these gentlmen--  https://stackoverflow.com/questions/62827002/bootstrap-v5-manually-call-a-modal-mymodal-show-not-working-vanilla-javascrip-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script>const myModal = document.getElementById('myModal')
+        const myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', () => {
+            myInput.focus()
+        })</script>
+
+
+</head>
+
+<body>
+
+    <header>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">ArtExpo</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Event.html">Events</a>
+                        </li>
+                        <li class="nav-item" id="disabledNavItem">
+                            <a class="nav-link disabled" href="UserBooking.html" tabindex="-1" aria-disabled="true">User
+                                Bookings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="EventCreate.html">Event Creator</a>
+                        </li>
+                    </ul>
+                    <button id="loginButton" class="btn btn-dark mx-2">Login</button>
+
+                    <button type="button" class="btn btn-dark ml-2" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Register
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Register</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="registerUsername" class="form-label">Username</label>
+                                            <input type="text" class="form-control" id="registerUsername"
+                                                placeholder="Choose a username" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="registerEmail" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="registerEmail"
+                                                placeholder="Enter your email" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="registerPassword" class="form-label">Password</label>
+                                            <input type="password" class="form-control" id="registerPassword"
+                                                placeholder="Choose a password" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-dark">Register</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            </div>
+            <!--Basic Js script that just changes login to logout when you click-->
+            <script>
+                var loginButton = document.getElementById("loginButton");
+                var disabledNavItem = document.querySelector(".nav-link.disabled");
+                var isLoggedIn = false;
+
+                loginButton.addEventListener("click", function () {
+                    // Toggle the 'disabled' class on the navigation item
+                    disabledNavItem.classList.toggle("disabled");
+
+                    // Toggle the 'aria-disabled' attribute
+                    if (disabledNavItem.getAttribute("aria-disabled") === "true") {
+                        disabledNavItem.setAttribute("aria-disabled", "false");
+                    } else {
+                        disabledNavItem.setAttribute("aria-disabled", "true");
+                    }
+
+                    // Toggle button text between "Login" and "Logout"
+                    if (isLoggedIn) {
+                        loginButton.textContent = "Login";
+                    } else {
+                        loginButton.textContent = "Logout";
+                    }
+
+                    // Toggle the logged-in state
+                    isLoggedIn = !isLoggedIn;
+                });
+            </script>
+
+
+            </div>
+            </div>
+        </nav>
+
+        <body>
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="event-details-container">
+                            <h2 class="event-details-text">The Picasso Event!</h2>
+                            <h4 class="event-details-text pt-3"><i class="bi bi-calendar3 event-details-icon"></i> Tue,
+                                11 September,
+                                2023</h4>
+                            <h4 class="event-details-text "><i class="bi bi-geo-alt event-details-icon"></i> Brisbane,
+                                4000, Art
+                                Gallery</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="event-details-text pt-3">Featured Artist: Picasso, More Picasso,
+                                        Picasso's Son</h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4 class="event-details-text pt-3">Genre: Alternative</h4>
+                                </div>
+                            </div>
+                            <h4 class="event-details-text pt-3">Event Details: </h4>
+                            <p class="event-details-text">Join us for a night of great art and fun at the Brisbane
+                                gallery! The event
+                                will
+                                feature artists such as Picasso and his son and Picasso himself</p>
+
+
+                            <button type="button" class="btn btn-dark" data-bs-toggle="modal"
+                                data-bs-target="#buyTicketsModal">
+                                Buy Tickets
+                            </button>
+
+                            <!-- Buy Tickets Modal -->
+                            <div class="modal fade" id="buyTicketsModal" tabindex="-1"
+                                aria-labelledby="buyTicketsModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="buyTicketsModalLabel">Buy Tickets</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="mb-3">
+                                                    <label for="ticketQuantity" class="form-label">Quantity</label>
+                                                    <input type="number" class="form-control" id="ticketQuantity"
+                                                        placeholder="Choose a quantity" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="ticketCardNumber" class="form-label">Card Number</label>
+                                                    <input type="text" class="form-control" id="ticketCardNumber"
+                                                        placeholder="Input your card number" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="ticketBSB" class="form-label">BSB</label>
+                                                    <input type="text" class="form-control" id="ticketBSB"
+                                                        placeholder="BSB" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="ticketFullName" class="form-label">Full name</label>
+                                                    <input type="text" class="form-control" id="ticketFullName"
+                                                        placeholder="Name as it appears on your card" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="ticketExpiry" class="form-label">Date of Expiry</label>
+                                                    <input type="text" class="form-control" id="ticketExpiry"
+                                                        placeholder="Date of Expiry" required>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-dark">Purchase</button>
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Comments Section -->
+                            <div class="comments-section mt-5">
+                                <h4>Comments</h4>
+
+                                <div class="comment mt-3">
+                                    <div class="comment-author">
+                                        <strong>Riley Pederson</strong>
+                                    </div>
+                                    <div class="comment-text">
+                                        I LOVE Picasso's work. Definitely a FIRE artist.
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-secondary mt-3" data-bs-toggle="modal"
+                                data-bs-target="#newCommentModal">
+                                New Comment
+                            </button>
+
+                            <!-- New Comment Modal -->
+                            <div class="modal fade" id="newCommentModal" tabindex="-1"
+                                aria-labelledby="newCommentModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="newCommentModalLabel">Add a new comment</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="commentAuthor" class="form-label">Name</label>
+                                                <input type="text" class="form-control" id="commentAuthor" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="commentText" class="form-label">Comment</label>
+                                                <textarea class="form-control" id="commentText" rows="3"
+                                                    required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-dark" id="addCommentButton">Add
+                                                Comment</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- JS based on https://gomakethings.com/updating-your-ui-based-on-user-inputs-with-vanilla-javascript/ -->
+                            <script>
+                                document.getElementById('addCommentButton').addEventListener('click', function () {
+                                    const author = document.getElementById('commentAuthor').value;
+                                    const text = document.getElementById('commentText').value;
+                                    const commentsSection = document.querySelector('.comments-section');
+
+                                    const newComment = document.createElement('div');
+                                    newComment.classList.add('comment', 'mt-3');
+
+                                    const newCommentAuthor = document.createElement('div');
+                                    newCommentAuthor.classList.add('comment-author');
+                                    newCommentAuthor.innerHTML = '<strong>' + author + '</strong>';
+                                    newComment.appendChild(newCommentAuthor);
+
+                                    const newCommentText = document.createElement('div');
+                                    newCommentText.classList.add('comment-text');
+                                    newCommentText.textContent = text;
+                                    newComment.appendChild(newCommentText);
+
+                                    commentsSection.appendChild(newComment);
+
+                                    document.getElementById('commentAuthor').value = '';
+                                    document.getElementById('commentText').value = '';
+                                });
+                            </script>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-indicators">
+                                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                            data-bs-slide-to="0" class="active" aria-current="true"
+                                            aria-label="Slide 1"></button>
+                                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                            data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                            data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                    </div>
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img src="./img/Picasso Art/Guernica-canvas-Pablo-Picasso-Madrid-Museo-Nacional-1937.png"
+                                                class="d-block w-100" alt="...">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="./img/Picasso Art/images.png" class="d-block w-100" alt="...">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="./img/Picasso Art/images-2.png" class="d-block w-100" alt="...">
+                                        </div>
+                                    </div>
+                                    <button class="carousel-control-prev" type="button"
+                                        data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button"
+                                        data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                                <h4 class="event-details-text pt-3"><i class="bi bi-palette event-details-icon"></i>
+                                    Picasso - Picasso
+                                    Art</h4>
+                                <p class="event-details-text" style="font-size: smaller; font-weight: bold;">For Sale:
+                                    $20</p>
+                                <h4 class="event-details-text pt-3">Description</h4>
+                                <p class="event-details-text">He was not only a master painter but also a sculptor,
+                                    printmaker, ceramics artist, etching artist and writer. His work matured from the
+                                    naturalism of his childhood through Cubism, Surrealism and beyond, shaping the
+                                    direction of modern and contemporary art through the decades.</p>
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <div class="picasso-image">
+                                    <img src="./img/Picasso Art/7567087@2x.jpg" class="d-block mb-2" alt="...">
+                                    <img src="./img/Picasso Art/pablo-picasso-girl-before-mirror-painting.jpg.webp"
+                                        class="d-block mb-2" alt="...">
+                                    <img src="./img/Picasso Art/paint-and-sip-class-picasso-portraits-melbourne-600.jpg"
+                                        class="d-block mb-2" alt="...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </main>
+
+        </body>
+
+
+
+</html>

@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./styles/styles.css">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+
+    <!-- Scripts for automatic carousels. The example one didnt work for some reason, so its from these gentlmen--  https://stackoverflow.com/questions/62827002/bootstrap-v5-manually-call-a-modal-mymodal-show-not-working-vanilla-javascrip-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script>const myModal = document.getElementById('myModal')
+        const myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', () => {
+            myInput.focus()
+        })</script>
+
+
+</head>
+
+<body>
+
+    <header>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">ArtExpo</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Event.html">Events</a>
+                        </li>
+                        <li class="nav-item" id="disabledNavItem">
+                            <a class="nav-link disabled" href="UserBooking.html" tabindex="-1" aria-disabled="true">User
+                                Bookings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="EventCreate.html">Event Creator</a>
+                        </li>
+                    </ul>
+                    <button id="loginButton" class="btn btn-dark mx-2">Login</button>
+
+                    <button type="button" class="btn btn-dark ml-2" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Register
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Register</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="registerUsername" class="form-label">Username</label>
+                                            <input type="text" class="form-control" id="registerUsername"
+                                                placeholder="Choose a username">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="registerEmail" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="registerEmail"
+                                                placeholder="Enter your email">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="registerPassword" class="form-label">Password</label>
+                                            <input type="password" class="form-control" id="registerPassword"
+                                                placeholder="Choose a password">
+                                        </div>
+                                        <button type="submit" class="btn btn-dark">Register</button>
+                                        <button type="submit" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--Basic Js script that just changes login to logout when you click-->
+                    <script>
+                        var loginButton = document.getElementById("loginButton");
+                        var disabledNavItem = document.querySelector(".nav-link.disabled");
+                        var isLoggedIn = false;
+
+                        loginButton.addEventListener("click", function () {
+                            // Toggle the 'disabled' class on the navigation item
+                            disabledNavItem.classList.toggle("disabled");
+
+                            // Toggle the 'aria-disabled' attribute
+                            if (disabledNavItem.getAttribute("aria-disabled") === "true") {
+                                disabledNavItem.setAttribute("aria-disabled", "false");
+                            } else {
+                                disabledNavItem.setAttribute("aria-disabled", "true");
+                            }
+
+                            // Toggle button text between "Login" and "Logout"
+                            if (isLoggedIn) {
+                                loginButton.textContent = "Login";
+                            } else {
+                                loginButton.textContent = "Logout";
+                            }
+
+                            // Toggle the logged-in state
+                            isLoggedIn = !isLoggedIn;
+                        });
+                    </script>
+
+
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mt-4">
+                    <!-- Filter list -->
+                    <div class="filter-list">
+                        <h3>Filter</h3>
+                        <ul>
+                            <li>
+                                <h4>Location</h4>
+                                <ul>
+                                    <li><a href="#">Location 1</a></li>
+                                    <li><a href="#">Location 2</a></li>
+                                    <li><a href="#">Location 3</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h4>Genre</h4>
+                                <ul>
+                                    <li><a href="#">Genre 1</a></li>
+                                    <li><a href="#">Genre 2</a></li>
+                                    <li><a href="#">Genre 3</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div class="price-range-container">
+                            <h3 class="price-range-label text-center">Price Range</h3>
+                            <div class="form-group text-center">
+                                <label for="priceRange">Select a Range:</label>
+                                <input type="range" class="form-range" id="priceRange" min="0" max="100" value="50">
+                            </div>
+                            <!-- Display selected range value -->
+                            <p class="text-center">Selected Range: $0 - <span id="rangeValue">50</span></p>
+                        </div>
+
+                        <!-- JavaScript to display selected range value -->
+                        <script>
+                            var priceRange = document.getElementById("priceRange");
+                            var rangeValue = document.getElementById("rangeValue");
+
+                            priceRange.oninput = function () {
+                                rangeValue.innerHTML = this.value;
+                            };
+                        </script>
+                        <button class="btn btn-dark filter-button" type="button">Apply Filters</button>
+
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <!-- Jumbotron -->
+                    <div class="text-center mb-4 mt-4">
+                        <form class="d-flex justify-content-center">
+                            <input class="form-control me-2" style="width: 500px;" type="search" placeholder="Search"
+                                aria-label="Search">
+                            <button class="btn btn-dark" type="submit">Search</button>
+                        </form>
+                    </div>
+                    <div class="jumbotronback container-fluid py-3"></div>
+                    <h1 class="display-4">New Events</h1>
+                    <p class="lead">Scroll down to find the latest in Art Events near you. And see our featured
+                        selections.</p>
+                    <hr class="my-4">
+
+                    <a class="btn btn-dark btn-lg" href="#" role="button">Learn more</a>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <!-- Carousel 1 -->
+                    <div class="carousel-container mt-4">
+                        <div id="carousel1" class="carousel slide">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img class="d-block w-100" src="./img/Picasso Art/7567087@2x.jpg" alt="First slide">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Picasso Event</h5>
+                                        <p>Status: Open</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100"
+                                        src="./img/Picasso Art/pablo-picasso-girl-before-mirror-painting.jpg.webp"
+                                        alt="Second slide">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100"
+                                        src="./img/Picasso Art/paint-and-sip-class-picasso-portraits-melbourne-600.jpg"
+                                        alt="Third slide">
+                                </div>
+                            </div>
+
+                            <a class="carousel-control-prev" href="#carousel1" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            </a>
+                            <a class="carousel-control-next" href="#carousel1" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            </a>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <h4>The Picasso Event</h4>
+                            <p>He was not only a master painter but also a sculptor, printmaker, ceramics artist,
+                                etching artist and writer. His work matured from the naturalism of his childhood through
+                                Cubism, Surrealism and beyond, shaping the direction of modern and contemporary art
+                                through the decades.</p>
+                            <p>Status: Active</p>
+                        </div>
+
+                        <div class="go-to-button">
+                            <a class="btn btn-dark" href="Event.html" role="button">Go to</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <!-- Carousel 2 -->
+                    <div class="carousel-container mt-4">
+                        <div id="carousel2" class="carousel slide">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img class="d-block w-100" src="./img/lagoon-main.jpg" alt="First slide">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Michalengelo Event</h5>
+                                        <p>Status: Inactive</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src="./img/d7hftxdivxxvm.cloudfront.net.webp"
+                                        alt="Second slide">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100"
+                                        src="./img/0b0c05ab37738047065246174e9b1bd24d-08-michelangelo-three-labours.2x.w710.jpg.webp"
+                                        alt="Third slide">
+                                </div>
+                            </div>
+
+                            <a class="carousel-control-prev" href="#carousel2" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+
+                            </a>
+                            <a class="carousel-control-next" href="#carousel2" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+
+                            </a>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <h4>The Michalengelo Event</h4>
+                            <p>Michelangelo was a sculptor, painter and architect widely considered to be one of the
+                                greatest artists of the Renaissance—and arguably of all time</p>
+                            <p>Status: Inactive</p>
+                        </div>
+
+                        <div class="go-to-button">
+                            <button class="btn btn-dark">Go to</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <!-- Carousel 3 -->
+                    <div class="carousel-container mt-4">
+                        <div id="carousel3" class="carousel slide">
+
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img class="d-block w-100"
+                                        src="./img/LeoArt/Head-Woman-oil-earth-poplar-wood-lead.jpg.webp"
+                                        alt="First slide">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Leonardo Da Vinci</h5>
+                                        <p>Status: Inactive</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src="./img/LeoArt/mona-lisa-niood-scaled.jpeg.webp"
+                                        alt="Second slide">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src="./img/LeoArt/Study_of_horse-e1447479369405.jpg.webp"
+                                        alt="Third slide">
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carousel3" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            </a>
+                            <a class="carousel-control-next" href="#carousel3" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            </a>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <h4>The Leonardo Event</h4>
+                            <p>He was a vegetarian who loved animals and despised war, yet he worked as a military
+                                engineer to invent advanced and deadly weapons. He was one of the greatest painters of
+                                the Italian Renaissance, yet he left only a handful of completed paintings.</p>
+                            <p>Status: Inactive</p>
+                        </div>
+                        <div class="go-to-button">
+                            <button class="btn btn-dark">Go to</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="genre-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="text-center">Browse Other Events Near You.</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="./img/4719669.jpg" alt="Event 1">
+                            <p>Cool art from featured artist</p>
+                        </div>
+                        <div class="col-md-3">
+                            <img src="./img/3783167.jpg" alt="Event 2">
+                            <p>Local art from featured artist</p>
+                        </div>
+                        <div class="col-md-3">
+                            <img src="./img/8589008.jpg" alt="Event 3">
+                            <p>Get inspired at the local art fair, featuring works from talented artists.</p>
+                        </div>
+                        <div class="col-md-3">
+                            <img src="./img/4824809.jpg" alt="Event 4">
+                            <p>Bring the whole family for an art show!!!</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="./img/3783167.jpg" alt="Event 5">
+                            <p>More artists at this one</p>
+                        </div>
+                        <div class="col-md-3">
+                            <img src="./img/3783168.jpg" alt="Event 6">
+                            <p>Catch the latest art at artshow number 6</p>
+                        </div>
+                        <div class="col-md-3">
+                            <img src="./img/3783167.jpg" alt="Event 7">
+                            <p>Banger artworks here at such and such</p>
+                        </div>
+                        <div class="col-md-3">
+                            <img src="./img/4719669.jpg" alt="Event 8">
+                            <p>Have some fun at this art show, Event number 8</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+
+</body>
+
+
+</html>

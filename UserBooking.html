@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./styles/styles.css">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+
+    <!-- Scripts for automatic carousels. The example one didnt work for some reason, so its from these gentlmen--  https://stackoverflow.com/questions/62827002/bootstrap-v5-manually-call-a-modal-mymodal-show-not-working-vanilla-javascrip-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script>const myModal = document.getElementById('myModal')
+        const myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', () => {
+            myInput.focus()
+        })</script>
+
+
+</head>
+
+<body>
+
+    <header>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">ArtExpo</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Event.html">Events</a>
+                        </li>
+                        <li class="nav-item" id="disabledNavItem">
+                            <a class="nav-link disabled" href="UserBooking.html" tabindex="-1" aria-disabled="true">User
+                                Bookings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="EventCreate.html">Event Creator</a>
+                        </li>
+                    </ul>
+                    <button id="loginButton" class="btn btn-dark mx-2">Login</button>
+
+                    <button type="button" class="btn btn-dark ml-2" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Register
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Register</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="registerUsername" class="form-label">Username</label>
+                                            <input type="text" class="form-control" id="registerUsername"
+                                                placeholder="Choose a username">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="registerEmail" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="registerEmail"
+                                                placeholder="Enter your email">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="registerPassword" class="form-label">Password</label>
+                                            <input type="password" class="form-control" id="registerPassword"
+                                                placeholder="Choose a password">
+                                        </div>
+                                        <button type="submit" class="btn btn-dark">Register</button>
+                                        <button type="submit" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--Basic Js script that just changes login to logout when you click-->
+                    <script>
+                        var loginButton = document.getElementById("loginButton");
+                        var disabledNavItem = document.querySelector(".nav-link.disabled");
+                        var isLoggedIn = false;
+
+                        loginButton.addEventListener("click", function () {
+                            // Toggle the 'disabled' class on the navigation item
+                            disabledNavItem.classList.toggle("disabled");
+
+                            // Toggle the 'aria-disabled' attribute
+                            if (disabledNavItem.getAttribute("aria-disabled") === "true") {
+                                disabledNavItem.setAttribute("aria-disabled", "false");
+                            } else {
+                                disabledNavItem.setAttribute("aria-disabled", "true");
+                            }
+
+                            // Toggle button text between "Login" and "Logout"
+                            if (isLoggedIn) {
+                                loginButton.textContent = "Login";
+                            } else {
+                                loginButton.textContent = "Logout";
+                            }
+
+                            // Toggle the logged-in state
+                            isLoggedIn = !isLoggedIn;
+                        });
+                    </script>
+
+
+                </div>
+            </div>
+        </nav>
+
+        <body>
+            <div class="container mt-5">
+                <h2 class="text-center">User Booking History</h2>
+                <table class="table table-bordered mt-4">
+                    <thead>
+                        <tr>
+                            <th scope="col">Event Image</th>
+                            <th scope="col">Event Name</th>
+                            <th scope="col">Booking/Order ID</th>
+                            <th scope="col">Booking Date & Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="./img/3783168.jpg" alt="Event Image" width="100"></td>
+                            <td>The Picasso Event</td>
+                            <td>2349FS39SD</td>
+                            <td>20/09/2023 10:00 AM</td>
+                        </tr>
+                        <tr>
+                            <td><img src="./img/8589008.jpg" alt="Event Image" width="100"></td>
+                            <td>The Leonardo Event</td>
+                            <td>2398FDR09TY</td>
+                            <td>12/09/2023 02:00 PM</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </body>
+</html>
